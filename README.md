@@ -8,7 +8,9 @@ Hope this would be useful for anyone
 - [x] 1. **Hello World with a Twist**
     - First program to test out main IO features!
 
-- [ ] 2. **Simple Calculator**
+- [x] 2. **Simple Calculator**
+    - Some practical use to pattern matching and number parsing
+    
 - [ ] 3. **Guessing Game**
 - [ ] 4. **Todo List CLI**
 - [x] 5. **Temperature Converter**
