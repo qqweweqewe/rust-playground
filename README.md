@@ -11,7 +11,8 @@ Hope this would be useful for anyone
 - [ ] 2. **Simple Calculator**
 - [ ] 3. **Guessing Game**
 - [ ] 4. **Todo List CLI**
-- [ ] 5. **Temperature Converter**
+- [x] 5. **Temperature Converter**
+    - diving deeper into arithmetic operations and io
 
 ---
 
