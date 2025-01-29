@@ -3,22 +3,15 @@ Just tinkering around, maybe something good would come out of this
 Hope this would be useful for anyone
 
 ## Roadmap
-### **Beginner Projects**
 
 - [x] 1. **Hello World with a Twist**
     - First program to test out main IO features!
-
 - [x] 2. **Simple Calculator**
-    - Some practical use to pattern matching and number parsing
-    
-- [ ] 3. **Guessing Game**
-- [ ] 4. **Todo List CLI**
-- [x] 5. **Temperature Converter**
-    - diving deeper into arithmetic operations and io
+    - Diving deeper into arithmetics, match cases and IO 
+- [ ] 3. **Todo List CLI**
 
 ---
 
-### **Intermediate Projects**
 
 - [ ] 1. **Text-Based Adventure Game**
 - [ ] 2. **HTTP Request CLI Tool**
@@ -27,7 +20,6 @@ Hope this would be useful for anyone
 
 ---
 
-### **Advanced Projects**
 
 - [ ] 1. **Multi-Threaded Web Crawler**
 - [ ] 2. **Chat Application**
@@ -37,7 +29,6 @@ Hope this would be useful for anyone
 
 ---
 
-### **Expert Projects**
 
 - [ ] 1. **Blockchain Implementation**
 - [ ] 2. **Smart Contract Engine**
