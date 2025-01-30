@@ -7,4 +7,5 @@ fn main() {
     io::stdin().read_line(&mut name).expect("something went wrong");
 
     println!("Hello, {}!", name.trim());
-}
+
+} 
