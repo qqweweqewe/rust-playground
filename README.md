@@ -8,15 +8,15 @@ Hope this would be useful for anyone
     - First program to test out main IO features!
 - [x] 2. **Simple Calculator**
     - Diving deeper into arithmetics, match cases and IO 
-- [ ] 3. **Todo List CLI**
+- [x] 3. **Todo List CLI**
+    - Cargo packages, command line parsing, filesystem and more!
 
 ---
 
 
-- [ ] 1. **Text-Based Adventure Game**
-- [ ] 2. **HTTP Request CLI Tool**
+- [ ] 1. **HTTP Request CLI Tool**
+- [ ] 2. **Password Manager CLI**
 - [ ] 3. **Simple Web Server**
-- [ ] 4. **Password Manager CLI**
 
 ---
 

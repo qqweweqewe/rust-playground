@@ -1,7 +1,8 @@
 use clap::{Parser, Subcommand};
 use std::path::PathBuf;
-use std::fs::OpenOptions;
+use std::fs::{OpenOptions, write, read_to_string, create_dir_all};
 use serde::{Serialize, Deserialize};
+use std::io::Error;
 
 #[derive(Subcommand)]
 enum Keyword {
@@ -40,6 +41,7 @@ struct ToDo {
     command: Option<Keyword>,
 }
 
+#[derive(Serialize, Deserialize)]
 struct Task {
     id: i32,
     description: String,
@@ -79,55 +81,80 @@ impl ToDoList {
         };
     }
 
-    pub fn list_tasks(self) {
-        for instance in self.tasks {
-           println!{} 
+    pub fn list_tasks(&self) {
+        for instance in &self.tasks {
+           println!("{}. {} [{}]", instance.id, instance.description, if instance.done { "x" } else { " " }); 
         }
     }
+
+    pub fn save(&self, path: &PathBuf) {
+        let json = serde_json::to_vec(&self.tasks).expect("failed to serialize data");
+        write(path, json).expect("failed to save data");
+    }
+
+    pub fn load(path: &PathBuf) -> Result<Self, Error> {
+        let data = read_to_string(path)?;
+        let tasks = serde_json::from_str(&data)?; 
+        Ok(Self { tasks })
+    }
+
 }
 
 fn main() {
-    let _data: PathBuf = setup_config_dir().expect("something went wrong while loading data :(");
+    let data_path: PathBuf = setup_config_dir().expect("something went wrong while loading data :(");
+
+    let mut list = ToDoList::load(&data_path).expect("failed to load data");
 
     let args = ToDo::parse();
-    match &args.command {
+
+    match args.command {
         Some(Keyword::Add { description }) => {
             println!("Added: {}", description);
+            list.add_task( description);
         }
         
         Some(Keyword::Remove { id }) => {
             println!("Removed ID: {}", id);
+            list.remove_task(id);
         }
         
         Some(Keyword::List) => {
-            println!("Imagine a task list here");
+            list.list_tasks();
         }
         
         Some(Keyword::Complete { id }) => {
-            println!("Task {} marked as done", id)
+            println!("Task {} marked as done", id);
+            list.complete_task(id);
         }
         
         None => {
             println!("Type 'todo-cli help' to see available commands")
         }
     }
+
+    list.save(&data_path);
 }
 
-fn setup_config_dir() -> std::io::Result<PathBuf> {
-    let data_path: PathBuf = dirs::home_dir()
-        .expect("Home directory not found")
-        .join(".local/share")
-        .join(env!("CARGO_PKG_NAME"));
+fn setup_config_dir() -> Result<PathBuf, Error> {
+    // let data_path: PathBuf = dirs::home_dir()
+    //     .expect("Home directory not found")
+    //     .join(".local/share")
+    //     .join(env!("CARGO_PKG_NAME"));
     
-    std::fs::create_dir_all(&data_path)?;
+    let data_path: PathBuf = PathBuf::new();
+
+    create_dir_all(&data_path)?;
     
     let file: PathBuf = data_path.join("data.json");
-    OpenOptions::new()
-        .create(true)
-        .append(true)
-        .open(&file)?;
+
+    if !file.exists() {
+        write(&file, "[]")?;
+    } else {
+        OpenOptions::new()
+            .read(true)
+            .append(true)
+            .open(&file)?;
+    }
 
     Ok(file)
-
 }
-
