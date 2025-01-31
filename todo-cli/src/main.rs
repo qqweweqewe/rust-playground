@@ -136,12 +136,10 @@ fn main() {
 }
 
 fn setup_config_dir() -> Result<PathBuf, Error> {
-    // let data_path: PathBuf = dirs::home_dir()
-    //     .expect("Home directory not found")
-    //     .join(".local/share")
-    //     .join(env!("CARGO_PKG_NAME"));
-    
-    let data_path: PathBuf = PathBuf::new();
+    let data_path: PathBuf = dirs::home_dir()
+    .expect("Home directory not found")
+    .join(".local/share")
+    .join(env!("CARGO_PKG_NAME"));
 
     create_dir_all(&data_path)?;
     
